@@ -1,0 +1,7 @@
+arguments: src/align_dataset_mtcnn.py Dataset/FaceData/raw Dataset/FaceData/processed --image_size 160 --margin 32 --random_order --gpu_memory_fraction 0.25
+--------------------
+tensorflow version: 2.17.0
+--------------------
+git hash: b'69ff1e149c0d84a123d6516ddd82970e65392608'
+--------------------
+b'diff --git a/video/camtest.mp4 b/video/camtest.mp4\nindex a503c89..40f1223 100644\nBinary files a/video/camtest.mp4 and b/video/camtest.mp4 differ'

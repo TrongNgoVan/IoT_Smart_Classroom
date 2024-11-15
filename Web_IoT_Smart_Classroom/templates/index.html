@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='avatar.ico') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phòng học thông minh</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+       
+        .header {
+            display: flex;
+            justify-content: flex-start; /* Thay đổi từ space-between thành flex-start */
+            align-items: center;
+            width: 100%;
+            padding: 10px 20px;
+            background-color: #b10404;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+        .header .logo {
+            margin-right: 20px; /* Thêm margin để tạo khoảng cách với user-info */
+        }
+        .header .logo img {
+            height: 50px;
+            vertical-align: middle;
+        }
+        .header .user-info {
+            display: flex;
+            align-items: center;
+            padding-left: 20px; /* Thêm padding bên trái */
+        }
+        .header .user-info img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+        .header .account-details {
+            text-align: left; /* Đổi từ right sang left */
+        }
+        .header .account-details a {
+            text-decoration: none;
+            color: rgb(252, 252, 252);
+            display: block; /* Giúp các link xếp dọc */
+            line-height: 1.4; /* Tăng khoảng cách giữa các dòng */
+        }
+        .header .account-details a:hover {
+            color: #e0e0e0;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            width: 80%;
+            max-width: 800px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-top: 15px;
+        }
+        input[type="file"] {
+            margin: 10px 0;
+        }
+        button {
+            background-color: #ca0606;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #a10404;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #e30606;
+        }
+        #uploaded-image {
+            margin-top: 20px;
+            max-width: 100%;
+            max-height: 400px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header" id="header">
+    <div class="logo">
+        <a href="">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+        </a>
+    </div>
+    <div class="user-info">
+        <img src="{{ url_for('static', filename='l/avatar.jpg') }}" alt="Account Icon">
+        <div class="account-details">
+            <b><a href="https://www.facebook.com/ngovantrong1308?locale=vi_VN">Ngọ Văn Trọng</a></b>
+            <a href="https://github.com/TrongNgoVan">B21DCCN726</a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h1>Web quản lý phòng học thông minh</h1>
+ 
+
+</div>
+
+
+</body>
+</html>
