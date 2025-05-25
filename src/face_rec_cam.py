@@ -4,6 +4,7 @@ import math
 import pickle
 import collections
 import argparse
+from diemdanh import update_attendance
 
 import numpy as np
 import cv2
@@ -104,7 +105,6 @@ def main():
                                         np.arange(len(best_class_indices)), best_class_indices]
                                     best_name = class_names[best_class_indices[0]]
                                     print("Name: {}, Probability: {}".format(best_name, best_class_probabilities))
-
                                     if best_class_probabilities > 0.8:
                                         cv2.rectangle(frame, (bb[i][0], bb[i][1]), (bb[i][2], bb[i][3]), (0, 255, 0), 2)
                                         text_x = bb[i][0]
@@ -112,14 +112,19 @@ def main():
 
                                         name = class_names[best_class_indices[0]]
                                         cv2.putText(frame, name, (text_x, text_y), cv2.FONT_HERSHEY_COMPLEX_SMALL,
-                                                    1, (255, 255, 255), thickness=1, lineType=2)
+                                                1, (255, 255, 255), thickness=1, lineType=2)
                                         cv2.putText(frame, str(round(best_class_probabilities[0], 3)), (text_x, text_y + 17),
-                                                    cv2.FONT_HERSHEY_COMPLEX_SMALL,
-                                                    1, (255, 255, 255), thickness=1, lineType=2)
+                                                cv2.FONT_HERSHEY_COMPLEX_SMALL,
+                                                1, (255, 255, 255), thickness=1, lineType=2)
+
+                                        # Gọi hàm update_attendance để cập nhật điểm danh
+                                        update_attendance(name)
+
                                         person_detected[best_name] += 1
                                     else:
                                         name = "Unknown"
 
+                                   
                     except:
                         pass
 

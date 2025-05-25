@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='avatar.ico') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phòng học thông minh</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+
+        .header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            padding: 10px 20px;
+            background-color: #b10404;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+
+        .header .logo {
+            margin-right: 20px;
+        }
+
+        .header .logo img {
+            height: 50px;
+            vertical-align: middle;
+        }
+
+        .header .user-info {
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+        }
+
+        .header .user-info img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+
+        .header .account-details {
+            text-align: left;
+        }
+
+        .header .account-details a {
+            text-decoration: none;
+            color: #fefefe;
+            display: block;
+            line-height: 1.4;
+        }
+
+        .header .account-details a:hover {
+            color: #e0e0e0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            width: 80%;
+            max-width: 900px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .students-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .students-table th, .students-table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .students-table th {
+            background-color: #b10404;
+            color: #fff;
+        }
+
+        .students-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .students-table tr:hover {
+            background-color: #ddd;
+        }
+
+        .students-table .btn {
+            padding: 8px 16px;
+            background-color: #ca0606;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .students-table .btn:hover {
+            background-color: #a10404;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header Section -->
+<div class="header" id="header">
+    <div class="logo">
+        <a href="/">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+        </a>
+    </div>
+    <div class="user-info">
+        <img src="{{ url_for('static', filename='l/avatar.jpg') }}" alt="Account Icon">
+        <div class="account-details">
+            <b><a href="https://www.facebook.com/ngovantrong1308?locale=vi_VN">Ngọ Văn Trọng</a></b>
+            <a href="https://github.com/TrongNgoVan">B21DCCN726</a>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content Section -->
+<div class="container">
+    <h1>Web quản lý phòng học thông minh</h1>
+
+    <!-- Hiển thị ngày hiện tại -->
+    <h3 id="current-date">Ngày hiện tại: </h3> <!-- Thêm phần tử để hiển thị ngày -->
+
+    <!-- Display student list -->
+    <h3>Danh sách sinh viên:</h3>
+    <table class="students-table">
+        <thead>
+            <tr>
+                <th>Mã Sinh Viên</th>
+                <th>Họ Tên</th>
+                <th>Điểm chuyên cần</th>
+                <th>Trạng thái hôm nay</th>
+                <th>Thời gian điểm danh</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student[0] }}</td>
+                <td>{{ student[1] }}</td>
+                <td>{{ student[2] }}</td>
+                <td>{{ student[3] }}</td>
+                <td>{{ student[4] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- JavaScript để lấy ngày hiện tại -->
+<script>
+    // Lấy ngày hiện tại
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleDateString('vi-VN'); // Định dạng ngày theo chuẩn Việt Nam
+
+    // Chèn ngày vào phần tử có id="current-date"
+    document.getElementById("current-date").innerText = "Ngày hiện tại: " + formattedDate;
+</script>
+
+</body>
+</html>

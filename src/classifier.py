@@ -1,26 +1,3 @@
-"""An example of how to use your own dataset to train a classifier that recognizes people.
-"""
-# MIT License
-# 
-# Copyright (c) 2016 David Sandberg
-# 
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-# 
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
 
 from __future__ import absolute_import
 from __future__ import division
@@ -35,6 +12,7 @@ import sys
 import math
 import pickle
 from sklearn.svm import SVC
+from sklearn.metrics import precision_score, recall_score, f1_score, classification_report
 
 def main(args):
   
@@ -103,7 +81,8 @@ def main(args):
                     pickle.dump((model, class_names), outfile)
                 print('Saved classifier model to file "%s"' % classifier_filename_exp)
                 
-            elif (args.mode=='CLASSIFY'):
+
+            elif (args.mode == 'CLASSIFY'):
                 # Classify images
                 print('Testing classifier')
                 with open(classifier_filename_exp, 'rb') as infile:
@@ -120,6 +99,20 @@ def main(args):
                     
                 accuracy = np.mean(np.equal(best_class_indices, labels))
                 print('Accuracy: %.3f' % accuracy)
+                
+                # Tính các chỉ số Precision, Recall và F1-score
+                precision = precision_score(labels, best_class_indices, average='weighted')
+                recall = recall_score(labels, best_class_indices, average='weighted')
+                f1 = f1_score(labels, best_class_indices, average='weighted')
+                
+                print('Precision: %.3f' % precision)
+                print('Recall: %.3f' % recall)
+                print('F1-score: %.3f' % f1)
+                
+                # In báo cáo chi tiết (nếu cần)
+                print('\nClassification Report:\n')
+                
+
                 
             
 def split_dataset(dataset, min_nrof_images_per_class, nrof_train_images_per_class):
@@ -168,3 +161,8 @@ def parse_arguments(argv):
 
 if __name__ == '__main__':
     main(parse_arguments(sys.argv[1:]))
+
+
+# python src/classifier.py TRAIN Dataset/FaceData/processed Models/20180402-114759.pb Models/facemodel.pkl --batch_size 1000
+
+# python src/align_dataset_mtcnn.py  Dataset/FaceData/raw Dataset/FaceData/processed --image_size 160 --margin 32  --random_order --gpu_memory_fraction 0.25
